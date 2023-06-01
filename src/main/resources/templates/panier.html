@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Panier</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="~{fragment-navbar :: navbar}"></div>
+
+
+<div class="container">
+  <h1>Panier</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Quantité</th>
+      <th>Prix unitaire</th>
+      <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="panier : ${panier}">
+      <td th:text="${panier.produit.nom}"></td>
+      <td th:text="${panier.quantite}"></td>
+      <td th:text="${panier.produit.getPrix()}"></td>
+      <td th:with="total=${panier.produit.getPrix() * panier.quantite}" th:text="${total}"></td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

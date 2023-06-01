@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ajout de la balise viewport -->
+    <title>Liste des produits</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        @media (max-width: 576px) {
+            p, .card-title, .card-text {
+                font-size: 18px; /* Réduction de la taille de la police */
+            }
+
+            .mb-4 {
+                margin-bottom: 1rem; /* Réduction de l'espace supplémentaire entre les éléments */
+            }
+
+            .prod-link {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            /* Pour rendre l'image de la carte plus petite sur les petits écrans */
+            .card-img-top {
+                height: auto;
+                max-width: 100%;
+            }
+
+            /* Pour réduire l'espace à l'intérieur de la carte sur les petits écrans */
+            .card-body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="~{fragment-navbar :: navbar}"></div>
+
+<div class="container">
+    <h1 class="mt-4">Bienvenue sur la boutique en ligne de Café Osé</h1>
+    <p>Chez nous, nous sommes passionnés par le café de qualité et nous mettons tout en œuvre pour vous offrir une expérience unique. Nous sélectionnons soigneusement nos grains de café en privilégiant les producteurs qui cultivent leurs caféiers de manière biologique, respectueuse de l'environnement et des travailleurs.</p>
+
+    <p>Naviguez à travers notre sélection de café bio et laissez-vous séduire par la richesse des arômes et des saveurs qui vous attendent. Réservez vos produits et venez les récupérer en magasin, nous vous attendons !</p>
+
+    <div class="row">
+        <div class="col-md-4 mb-4" th:each="produit : ${produits}">
+            <div class="card">
+                <img th:src="@{${produit.image}}" class="card-img-top" alt="Image produit">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${produit.nom}"></h5>
+                    <p class="card-text" th:text="${produit.origine}">Origine : </p>
+                    <p class="card-text" th:text="${produit.description}"></p>
+                    <p class="card-text" th:text="${produit.prix}+'€ par kg'"></p>
+                    <a class="btn btn-primary prod-link" th:href="@{'/panier/' + ${username} + '/' + ${produit.id}}">Ajouter au panier</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

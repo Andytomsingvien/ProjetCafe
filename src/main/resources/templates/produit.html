@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ajout de la balise viewport -->
+    <title>Présentation du produit</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            padding-top: 30px;
+        }
+        h1{
+            padding-bottom: 20px;
+        }
+        .product-img {
+            max-width: 60%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 576px) {
+            h1, h2, p {
+                font-size: 18px; /* Réduction de la taille de la police */
+            }
+
+            .container {
+                padding-top: 20px; /* Réduction du padding-top */
+            }
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragment-navbar :: navbar}"></div>
+
+<div class="container">
+    <h1 class="mb-4">Détails du produit</h1>
+    <div class="row">
+        <div class="col-lg-6">
+            <img th:src="@{'/'+${produit.image}}" class="product-img" alt="Image produit">
+        </div>
+        <div class="col-lg-6">
+            <h2 th:text="${produit.nom}"></h2>
+            <p><strong>Origine :</strong> <span th:text="${produit.origine}"></span></p>
+            <p><strong>Description :</strong> <span th:text="${produit.description}"></span></p>
+            <p><strong>Prix :</strong> <span th:text="${produit.prix}+'€ par kg'"></span></p>
+            <a th:href="@{'/panier/' + ${username} + '/' + ${produit.id}}" class="btn btn-primary">Ajouter au panier</a>
+            <h2 th:text="${username}"></h2>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
