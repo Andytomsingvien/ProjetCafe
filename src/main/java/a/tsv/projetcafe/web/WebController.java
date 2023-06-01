@@ -22,11 +22,9 @@ public class WebController {
     @Autowired
     private PanierService panierService;
     @GetMapping(path ={"/","/index"})
-    public String addAllProduits(Authentication authentication,Model model) {
+    public String addAllProduits(Model model) {
 
         List<Produit> produits = produitService.findAll();
-        String username = authentication.getName();
-        model.addAttribute("username", authentication.getName());
         model.addAttribute("produits", produits);
         return "index";
     }
@@ -50,6 +48,8 @@ public class WebController {
         List<Panier> paniers = panierService.findAll();
         Panier panierACreer = panierService.gestionPanier(paniers,id,username,produit);
         panierService.save(panierACreer);
+        model.addAttribute("username", username);
+
         return "redirect:/index";  // changement ici
     }
 
@@ -59,6 +59,32 @@ public class WebController {
         List<Panier> allPaniers = panierService.findAll();
         List<Panier> paniers = panierService.findPanierByUser(username, allPaniers);
         model.addAttribute("panier", paniers);
+        model.addAttribute("username", username);
+
         return "panier";
     }
+
+    @GetMapping(path = "/panier/augmenterQuantite/{id}")
+
+    public String augmenterQuantite(@PathVariable Long id, Model model,Authentication authentication){
+        Panier panierConcerne = panierService.getReferenceById(id);
+        panierConcerne.setQuantite(panierConcerne.getQuantite()+1);
+        panierService.save(panierConcerne);
+        return "redirect:/panier/" + authentication.getName();
+  }
+
+    @GetMapping(path = "/panier/diminuerQuantite/{id}")
+
+    public String diminuerQuantite(@PathVariable Long id, Model model,Authentication authentication){
+        Panier panierConcerne = panierService.getReferenceById(id);
+        if (panierConcerne.getQuantite()>1){
+            panierConcerne.setQuantite(panierConcerne.getQuantite()-1);
+            panierService.save(panierConcerne);
+
+        }
+        else {
+            panierService.delete(panierConcerne);
+        }
+        return "redirect:/panier/" + authentication.getName();
+            }
 }

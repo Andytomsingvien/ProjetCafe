@@ -2,22 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ajout de la balise viewport -->
   <title>Panier</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    @media (max-width: 576px) {
+      .container h1, table {
+        font-size: 18px; /* Réduction de la taille de la police */
+      }
+
+      .btn-sm, .btn-lg {
+        font-size: 14px;
+        padding: 8px 16px;
+        width: 40px; /* Ajout d'une largeur fixe pour les boutons */
+      }
+
+      .btn-lg {
+        width: auto; /* Ajout d'une largeur automatique pour le bouton de validation */
+      }
+    }
+  </style>
 </head>
 <body>
 <div th:replace="~{fragment-navbar :: navbar}"></div>
 
-
 <div class="container">
-  <h1>Panier</h1>
+  <h1 class="mt-4">Mon panier</h1>
   <table class="table table-striped">
     <thead>
     <tr>
-      <th>Nom</th>
+      <th>Café</th>
       <th>Quantité</th>
-      <th>Prix unitaire</th>
+      <th>Prix pour 250g</th>
       <th>Total</th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -25,14 +43,40 @@
       <td th:text="${panier.produit.nom}"></td>
       <td th:text="${panier.quantite}"></td>
       <td th:text="${panier.produit.getPrix()}"></td>
-      <td th:with="total=${panier.produit.getPrix() * panier.quantite}" th:text="${total}"></td>
+      <td th:with="total=${panier.produit.getPrix() * panier.quantite}" th:text="${total}+' €'" th:attr="data-price=${total}"></td>
+      <td>
+        <a th:href="@{/panier/augmenterQuantite/{id}(id=${panier.id})}" class="btn btn-primary btn-sm">+</a>
+        <a th:href="@{/panier/diminuerQuantite/{id}(id=${panier.id})}" class="btn btn-primary btn-sm">-</a>
+      </td>
     </tr>
-
     </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="3" class="text-right"><strong>Total :</strong></td>
+      <td id="totalPrice"> </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td colspan="5" class="text-right">
+        <a href="#" class="btn btn-primary btn-lg">Valider le panier</a>
+      </td>
+    </tr>
+    </tfoot>
   </table>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function() {
+    var total = 0;
+    $('td[data-price]').each(function() {
+      total += parseFloat($(this).attr('data-price'));
+    });
+    $('#totalPrice').text(total.toFixed(2) + "€");
+  });
+</script>
+
 </body>
+
 </html>

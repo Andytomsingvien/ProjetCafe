@@ -25,6 +25,7 @@ public interface PanierService extends JpaRepository<Panier, Long> {
             if (panier.getUsername().equals(username)&& panier.getProduit().getId() == id){
                 panier.setQuantite(panier.getQuantite()+1);
                 panierAretourner = panier;
+                break;
             }
             else {
                 Panier paniero = new Panier(1,username,produit);

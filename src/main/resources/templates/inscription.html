@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
-            padding-top: 40px;
-            padding-bottom: 40px;
-            background-color: #f5f5f5;
+            background-color: #BCAAA4;
         }
 
         .container {
+            padding-top: 40px;
             max-width: 400px;
             margin: 0 auto;
+            color: #6D4C41;
         }
 
         .form-group {
@@ -21,14 +22,32 @@
         }
 
         .error {
-            color: red;
+            color: #f44336; /* un rouge plus profond pour le message d'erreur */
         }
+
+        .form-control {
+            border: 1px solid #6D4C41;
+            background-color: #FFFFFF;
+            color: #6D4C41;
+        }
+
+        .btn-danger {
+            background-color: #6D4C41;
+            border-color: #6D4C41;
+            color: #F5E0D3;
+        }
+
+        .btn-primary {
+            background-color: #8C7A63;
+            border-color: #8C7A63;
+            color: #F5E0D3;
+        }
+
     </style>
 </head>
-
-<body>
 <div th:replace="~{fragment-navbar :: navbar}"></div>
 
+<body>
 
 <div class="container">
     <h2>Inscription</h2>
@@ -61,5 +80,6 @@
         </div>
     </form>
 </div>
+
 </body>
 </html>

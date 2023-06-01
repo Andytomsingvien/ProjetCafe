@@ -1,34 +1,34 @@
 <div th:fragment="navbar">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <img src="chemin/vers/votre/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        Mon Logo
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/index}">Accueil</a>
-            </li>
-            <li class="nav-item" th:if="${#authorization.expression('isAnonymous')}">
-                <a class="nav-link" th:href="@{/login}">Se connecter</a>
-            </li>
-            <li class="nav-item" th:if="${#authorization.expression('isAuthenticated')}">
-                <a class="nav-link" th:href="@{/logout}">Se déconnecter</a>
-            </li>
-            <li class="nav-item" th:if="${#authorization.expression('isAnonymous')}">
-                <a class="nav-link" th:href="@{/inscription}">Inscription</a>
-            </li>
-            <li class="nav-item" th:if="${#authorization.expression('isAuthenticated')}">
-                <a class="nav-link" th:href="@{/inscription}">Mes commandes</a>
-            </li>
-            <li class="nav-item" th:if="${#authorization.expression('isAuthenticated')}">
-                <a class="nav-link" th:href="@{/panier/{username}}">Panier</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+    <nav class="navbar navbar-expand-lg" style="background-color: #6D4C41; color: #F5E0D3;">
+        <a class="navbar-brand" href="#">
+            <img src="chemin/vers/votre/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <span style="color: #F5E0D3;">Mon Logo</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="border-color: #BCAAA4;">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/index}" style="color: #F5E0D3;">Accueil</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAnonymous')}">
+                    <a class="nav-link" th:href="@{/login}" style="color: #F5E0D3;">Se connecter</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated')}">
+                    <a class="nav-link" th:href="@{/logout}" style="color: #F5E0D3;">Se déconnecter</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAnonymous')}">
+                    <a class="nav-link" th:href="@{/inscription}" style="color: #F5E0D3;">Inscription</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated')}">
+                    <a class="nav-link" th:href="@{/inscription}" style="color: #F5E0D3;">Mes commandes</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated')}">
+                    <a class="nav-link" th:href="@{/panier/{username}}" style="color: #F5E0D3;">Panier</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
