@@ -111,7 +111,6 @@ public class WebController {
             model.addAttribute("errorMessage", errorMessage);
             return "error";
         }
-
         String username = authentication.getName();
         List<Panier> listeAllPanier = panierService.findAll();
         List<Panier> paniersByUser = panierService.findPaniersByUser(username, listeAllPanier);
