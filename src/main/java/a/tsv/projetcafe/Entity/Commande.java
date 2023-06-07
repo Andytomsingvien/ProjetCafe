@@ -8,15 +8,12 @@ import java.util.List;
 @Entity
 @Table(name="commande")
 public class Commande {
-    public Commande(int id, String username, LocalDateTime dateCreation, LocalDateTime dateCloture, int etats, double montant, List<CommandeProduit> commandeProduits, String user) {
-        this.id = id;
+    public Commande(String username, LocalDateTime dateCloture, int etats, double montant) {
         this.username = username;
-        this.dateCreation = dateCreation;
+        this.dateCreation = LocalDateTime.now();
         this.dateCloture = dateCloture;
         this.etats = etats;
         this.montant = montant;
-        this.commandeProduits = commandeProduits;
-        this.user = user;
     }
 
     @Id
@@ -42,8 +39,7 @@ public class Commande {
     @OneToMany(mappedBy="commande")
     private List<CommandeProduit> commandeProduits;
 
-    @Column(nullable = false)
-    private String user;
+
 
     public Commande() {
 
@@ -104,14 +100,4 @@ public class Commande {
     public void setCommandeProduits(List<CommandeProduit> commandeProduits) {
         this.commandeProduits = commandeProduits;
     }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    // Getters et setters...
 }

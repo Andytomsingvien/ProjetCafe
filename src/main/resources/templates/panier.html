@@ -7,6 +7,16 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <style>
     @media (max-width: 576px) {
+      body, html {
+        padding: 0;
+        margin: 0;
+      }
+
+      .navbar {
+        margin: 0;
+        padding: 0;
+      }
+
       .container h1, table {
         font-size: 18px; /* Réduction de la taille de la police */
       }
@@ -24,9 +34,10 @@
   </style>
 </head>
 <body>
-<div th:replace="~{fragment-navbar :: navbar}"></div>
 
-<div class="container">
+<div class="container-fluid">
+  <div class="navbar" th:replace="~{fragment-navbar :: navbar}"></div>
+
   <h1 class="mt-4">Mon panier</h1>
   <table class="table table-striped">
     <thead>
@@ -58,7 +69,11 @@
     </tr>
     <tr>
       <td colspan="5" class="text-right">
-        <a href="#" class="btn btn-primary btn-lg">Valider le panier</a>
+        <form th:action="@{/panier/valider}" method="post">
+          <label for="dateReception">Date de réception :</label>
+          <input type="datetime-local" id="dateReception" name="dateReception" required min="{{#dates.format(#dates.createNow(), 'yyyy-MM-ddTHH:mm')}}">
+          <button type="submit" class="btn btn-primary btn-lg">Valider le panier</button>
+        </form>/
       </td>
     </tr>
     </tfoot>
@@ -74,6 +89,19 @@
       total += parseFloat($(this).attr('data-price'));
     });
     $('#totalPrice').text(total.toFixed(2) + "€");
+
+    // Désactiver le bouton de validation si la date de réception est vide
+    var dateReceptionInput = $('#dateReception');
+    var validerBtn = $('.btn-valider');
+
+    dateReceptionInput.on('input', function() {
+      var dateReception = dateReceptionInput.val();
+      if (dateReception.trim() !== '') {
+        validerBtn.prop('disabled', false);
+      } else {
+        validerBtn.prop('disabled', true);
+      }
+    });
   });
 </script>
 

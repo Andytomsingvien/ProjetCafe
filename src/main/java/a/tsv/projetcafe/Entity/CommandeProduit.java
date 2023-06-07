@@ -22,6 +22,15 @@ public class CommandeProduit {
     @JoinColumn(name="id_produit", nullable=false)
     private Produit produit;
 
+    public CommandeProduit(int quantite, Commande commande, Produit produit) {
+        this.quantite = quantite;
+        this.commande = commande;
+        this.produit = produit;
+    }
+
+    public CommandeProduit() {
+    }
+
     public int getId() {
         return id;
     }
