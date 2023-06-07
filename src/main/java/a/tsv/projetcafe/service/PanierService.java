@@ -38,4 +38,15 @@ public interface PanierService extends JpaRepository<Panier, Long> {
         }
         return panierAretourner;
     }
+
+    default List<Panier> findPaniersByUser(String username,List<Panier> allPanier){
+         List<Panier> panierARetourner = new ArrayList<>();
+         for(Panier panier : allPanier){
+             if (panier.getUsername().equals(username)){
+                 panierARetourner.add(panier);
+             }
+         }
+         return panierARetourner;
+    }
+
 }

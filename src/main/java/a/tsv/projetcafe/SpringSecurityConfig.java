@@ -44,8 +44,11 @@ public class SpringSecurityConfig
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
-        return http.csrf().disable() // Pour l'instant on désactive la protection CSRF
+        return http.csrf().disable() //
+// Pour l'instant on désactive la protection CSRF
                 .authorizeHttpRequests() //
+                .requestMatchers(HttpMethod.POST, "/panier/valider").permitAll()
+
                 .requestMatchers("/votes/**").authenticated() //
                 .requestMatchers("/change-password").authenticated() //
                 .requestMatchers("/produit/{id}").authenticated() //
@@ -54,8 +57,6 @@ public class SpringSecurityConfig
 
 
 
-                .requestMatchers(HttpMethod.PUT).authenticated() //
-                .requestMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN") //
                 .requestMatchers("/admin/**").hasRole("ADMIN") //
                 .anyRequest().permitAll() //
                 .and()//

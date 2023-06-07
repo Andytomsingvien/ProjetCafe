@@ -65,6 +65,7 @@
                 <img th:src="@{${produit.image}}" class="card-img-top" alt="Image produit">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${produit.nom}"></h5>
+                    <h5 class="card-title" th:text="'Origine : '+${produit.origine}"></h5>
                     <p class="card-text description" th:text="${produit.description}"></p>
                     <p class="card-text" th:text="${produit.prix}+'€ /250g'"></p>
                     <a class="btn btn-primary prod-link" th:href="@{'/panier/' + ${username} + '/' + ${produit.id}}">Ajouter au panier</a>

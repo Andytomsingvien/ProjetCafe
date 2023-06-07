@@ -1,8 +1,8 @@
 <div th:fragment="navbar">
-    <nav class="navbar navbar-expand-lg" style="background-color: #6D4C41; color: #F5E0D3;">
+    <nav class="navbar navbar-expand-lg w-100" style="background-color: #6D4C41; color: #F5E0D3;">
         <a class="navbar-brand" href="#">
-            <img src="chemin/vers/votre/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-            <span style="color: #F5E0D3;">Mon Logo</span>
+            <img src="/cafelogo.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+            <span style="color: #F5E0D3;">Café Osé</span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="border-color: #BCAAA4;">
@@ -19,13 +19,28 @@
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated')}">
                     <a class="nav-link" th:href="@{/logout}" style="color: #F5E0D3;">Se déconnecter</a>
                 </li>
+                <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <a class="nav-link" th:href="@{/logout}" style="color: #F5E0D3;">Commande à préparer</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <a class="nav-link" th:href="@{/logout}" style="color: #F5E0D3;">Historique</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <a class="nav-link" th:href="@{/logout}" style="color: #F5E0D3;">Commande en attente</a>
+                </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAnonymous')}">
                     <a class="nav-link" th:href="@{/inscription}" style="color: #F5E0D3;">Inscription</a>
                 </li>
-                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated')}">
-                    <a class="nav-link" th:href="@{/inscription}" style="color: #F5E0D3;">Mes commandes</a>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated() and !hasRole(''ROLE_ADMIN'')')}">
+                    <a class="nav-link" th:href="@{/commandes/encours}" style="color: #F5E0D3;">Commandes</a>
                 </li>
-                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated')}">
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated() and !hasRole(''ROLE_ADMIN'')')}">
+                    <a class="nav-link" th:href="@{/commandes/pretes}" style="color: #F5E0D3;">Commandes prêtes</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated() and !hasRole(''ROLE_ADMIN'')')}">
+                    <a class="nav-link" th:href="@{/commandes/encours}" style="color: #F5E0D3;">Historique</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated() and !hasRole(''ROLE_ADMIN'')')}">
                     <a class="nav-link" th:href="@{/panier/{username}}" style="color: #F5E0D3;">Panier</a>
                 </li>
             </ul>
