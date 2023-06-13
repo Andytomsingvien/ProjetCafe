@@ -6,6 +6,7 @@
   <title>Panier</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <style>
+    .container-fluid{}
     @media (max-width: 576px) {
       body, html {
         padding: 0;
@@ -31,12 +32,16 @@
         width: auto; /* Ajout d'une largeur automatique pour le bouton de validation */
       }
     }
+    .btn-custom{
+      background-color: #8D6E63;
+      color: white;
+    }
   </style>
 </head>
 <body>
+<div class="navbar" th:replace="~{fragment-navbar :: navbar}"></div>
 
 <div class="container-fluid">
-  <div class="navbar" th:replace="~{fragment-navbar :: navbar}"></div>
 
   <h1 class="mt-4">Mon panier</h1>
   <table class="table table-striped">
@@ -53,11 +58,11 @@
     <tr th:each="panier : ${panier}">
       <td th:text="${panier.produit.nom}"></td>
       <td th:text="${panier.quantite}"></td>
-      <td th:text="${panier.produit.getPrix()}"></td>
+      <td th:text="${panier.produit.getPrix()}+' €'"></td>
       <td th:with="total=${panier.produit.getPrix() * panier.quantite}" th:text="${total}+' €'" th:attr="data-price=${total}"></td>
       <td>
-        <a th:href="@{/panier/augmenterQuantite/{id}(id=${panier.id})}" class="btn btn-primary btn-sm">+</a>
-        <a th:href="@{/panier/diminuerQuantite/{id}(id=${panier.id})}" class="btn btn-primary btn-sm">-</a>
+        <a th:href="@{/panier/augmenterQuantite/{id}(id=${panier.id})}" class="btn btn-custom btn-sm">+</a>
+        <a th:href="@{/panier/diminuerQuantite/{id}(id=${panier.id})}" class="btn btn-custom btn-sm">-</a>
       </td>
     </tr>
     </tbody>
@@ -72,8 +77,8 @@
         <form th:action="@{/panier/valider}" method="post">
           <label for="dateReception">Date de réception :</label>
           <input type="datetime-local" id="dateReception" name="dateReception" required min="{{#dates.format(#dates.createNow(), 'yyyy-MM-ddTHH:mm')}}">
-          <button type="submit" class="btn btn-primary btn-lg">Valider le panier</button>
-        </form>/
+          <button type="submit" class="btn btn-custom btn-lg">Valider le panier</button>
+        </form>
       </td>
     </tr>
     </tfoot>

@@ -17,6 +17,10 @@
         h1 {
             color: #343a40;
         }
+        .btn-custom{
+            background-color: #8D6E63;
+            color: white;
+        }
 
         .card {
             background-color: #fff;
@@ -38,13 +42,15 @@
 
 <div class="container-fluid">
 
-    <h1 class="mt-4">Mes commandes prêtes</h1>
+    <h1 class="mt-4">Commande à préparer</h1>
 
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div th:each="commande : ${commandes}" class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Commande n°<span th:text="${commande.id}"></span></h5>
+                    <h5 class="card-title">Commande n°<span th:name="id" th:text="${commande.id}"></span></h5>
+                    <p class="card-text"><strong>Client : <span th:text="${commande.username}"></span></strong></p>
+
                     <p class="card-text">Date de commande : <span th:text="${commande.dateCreation.toString().replace('T', ' ')}"></span></p>
                     <p class="card-text">Date limite de récupération : <span th:text="${commande.dateCloture.toString().substring(0, 10).replace('T', ' ')}"></span></span></p>
 
@@ -66,6 +72,7 @@
                     </table>
 
                     <p class="text-right-bottom">Total : <strong><span th:text="${commande.montant}+'0€'"></span></strong></p>
+                    <a class="btn btn-custom prod-link" th:href="@{/admin/augmenterEtatCommande1to2/{id}(id=${commande.id})}">Commande Prête</a>
                 </div>
             </div>
         </div>

@@ -20,13 +20,13 @@
                     <a class="nav-link" th:href="@{/logout}" style="color: #F5E0D3;">Se déconnecter</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                    <a class="nav-link" th:href="@{/logout}" style="color: #F5E0D3;">Commande à préparer</a>
+                    <a class="nav-link" th:href="@{/admin/commandes/stage1}" style="color: #F5E0D3;">Commande à préparer</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                    <a class="nav-link" th:href="@{/logout}" style="color: #F5E0D3;">Historique</a>
+                    <a class="nav-link" th:href="@{/admin/commandes/stage2}" style="color: #F5E0D3;">Commande en attente</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                    <a class="nav-link" th:href="@{/logout}" style="color: #F5E0D3;">Commande en attente</a>
+                    <a class="nav-link" th:href="@{/admin/commandes/stage3}" style="color: #F5E0D3;">Historique</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAnonymous')}">
                     <a class="nav-link" th:href="@{/inscription}" style="color: #F5E0D3;">Inscription</a>
@@ -38,7 +38,10 @@
                     <a class="nav-link" th:href="@{/commandes/pretes}" style="color: #F5E0D3;">Commandes prêtes</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated() and !hasRole(''ROLE_ADMIN'')')}">
-                    <a class="nav-link" th:href="@{/commandes/encours}" style="color: #F5E0D3;">Historique</a>
+                    <a class="nav-link" th:href="@{/commandes/historique}" style="color: #F5E0D3;">Historique</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated() and hasRole(''ROLE_ADMIN'')')}">
+                    <a class="nav-link" th:href="@{/admin/formProduit}" style="color: #F5E0D3;">Ajouter un Produit</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated() and !hasRole(''ROLE_ADMIN'')')}">
                     <a class="nav-link" th:href="@{/panier/{username}}" style="color: #F5E0D3;">Panier</a>

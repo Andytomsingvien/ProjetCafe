@@ -38,15 +38,17 @@
 
 <div class="container-fluid">
 
-    <h1 class="mt-4">Mes commandes prêtes</h1>
+    <h1 class="mt-4">Historique des commandes</h1>
 
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div th:each="commande : ${commandes}" class="card">
                 <div class="card-body">
                     <h5 class="card-title">Commande n°<span th:text="${commande.id}"></span></h5>
+                    <h5 class="card-title">Client : <span th:text="${commande.username}"></span></h5>
+
                     <p class="card-text">Date de commande : <span th:text="${commande.dateCreation.toString().replace('T', ' ')}"></span></p>
-                    <p class="card-text">Date limite de récupération : <span th:text="${commande.dateCloture.toString().substring(0, 10).replace('T', ' ')}"></span></span></p>
+                    <p class="card-text">Délivrée le : <span th:text="${commande.dateCloture.toString().substring(0, 10).replace('T', ' ')}"></span></span></p>
 
                     <table class="table">
                         <thead>
@@ -66,6 +68,7 @@
                     </table>
 
                     <p class="text-right-bottom">Total : <strong><span th:text="${commande.montant}+'0€'"></span></strong></p>
+
                 </div>
             </div>
         </div>

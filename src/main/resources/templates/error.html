@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Erreur</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    @media (max-width: 576px) {
+      p, h1, h2 {
+        font-size: 18px;
+      }
+      .mb-4 {
+        margin-bottom: 1rem;
+      }
+    }
+    h1, h2{
+      color: #6D4C41;
+    }
+    p{
+      color: #3E2723;
+    }
+    .error-message {
+      color: #8D6E63;
+    }
+    .card {
+      border-color: #BCAAA4;
+    }
+    .description {
+      min-height: 150px;
+      color: #4E342E;
+    }
+    .dernierp{
+      margin-bottom: 40px;
+      color: #3E2723;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="mt-4">Oups, une erreur s'est produite.</h1>
+  <p class="error-message">Désolé, une erreur inattendue s'est produite lors de la dernière opération.</p>
+
+  <h2>Détails de l'erreur:</h2>
+  <p class="error-message" th:text="${errorMessage}"></p>
+  <a class="btn btn-primary" href="/">Retour à l'accueil</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>

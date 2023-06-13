@@ -48,22 +48,18 @@ public class SpringSecurityConfig
 // Pour l'instant on désactive la protection CSRF
                 .authorizeHttpRequests() //
                 .requestMatchers(HttpMethod.POST, "/panier/valider").permitAll()
-
-                .requestMatchers("/votes/**").authenticated() //
                 .requestMatchers("/change-password").authenticated() //
                 .requestMatchers("/produit/{id}").authenticated() //
                 .requestMatchers("/panier/**").authenticated() //
                 .requestMatchers("/panier/{username}/{id}").authenticated() //
-
-
-
+                .requestMatchers("/commandes/**").authenticated() //
                 .requestMatchers("/admin/**").hasRole("ADMIN") //
+                .requestMatchers("/login").anonymous()
                 .anyRequest().permitAll() //
                 .and()//
                 .httpBasic()
                 .and()
                 .formLogin()//
-                .loginPage("/login").permitAll() //
                 .and().passwordManagement(management -> management.changePasswordPage("/change-password")) //
                 .build();
     }
