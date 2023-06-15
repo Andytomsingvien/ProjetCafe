@@ -86,6 +86,16 @@ public class Produit {
     public void setCommandeProduits(List<CommandeProduit> commandeProduits) {
         this.commandeProduits = commandeProduits;
     }
+public Produit(){
+
+}
+    public Produit(String nom, String origine, String description, double prix, String image) {
+        this.nom = nom;
+        this.origine = origine;
+        this.description = description;
+        this.prix = prix;
+        this.image = image;
+    }
 
     // Getters et setters...
 }

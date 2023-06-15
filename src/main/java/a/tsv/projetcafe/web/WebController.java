@@ -50,7 +50,7 @@ public class WebController {
     public String addAllProduits(Model model) {
         try {
             List<Produit> produits = produitService.findAll();
-            List<Produit> produitAfficher = produitService.findProduitAficher(produits);
+            List<Produit> produitAfficher = produitService.findProduitAfficher(produits);
             produitAfficher.sort(Comparator.comparing(Produit::getImage));
             model.addAttribute("produits", produitAfficher);
             return "index";
@@ -414,7 +414,7 @@ public class WebController {
         try {
             List<Commande> allCommandes = commandeService.findAll();
             List<Commande> allCommandesStage3 = commandeService.findCommandeByEtats(allCommandes, 3);
-            allCommandesStage3.sort(Comparator.comparing(Commande::getDateCloture));
+            allCommandesStage3.sort(Comparator.comparing(Commande::getDateCloture).reversed());
             model.addAttribute("commandes", allCommandesStage3);
             return "commandeStage3";
         } catch (Exception e) {
@@ -430,7 +430,7 @@ public class WebController {
      * @return Redirection vers la page d'accueil
      * @throws RuntimeException si une erreur se produit lors de l'ajout d'un produit
      */
-    @GetMapping(path = "/admin/ajouter/produits")
+    @GetMapping(path = "/admin/ajouter/produit")
     public String ajouterNouveauProduit(@ModelAttribute Produit produit) {
         try {
             produitService.save(produit);

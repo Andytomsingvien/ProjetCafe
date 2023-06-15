@@ -59,7 +59,9 @@ public class SpringSecurityConfig
                 .and()//
                 .httpBasic()
                 .and()
-                .formLogin()//
+                .formLogin()
+                    .loginPage("/login") // Spécifiez l'URL de votre page de connexion personnalisée
+                    .permitAll()//
                 .and().passwordManagement(management -> management.changePasswordPage("/change-password")) //
                 .build();
     }

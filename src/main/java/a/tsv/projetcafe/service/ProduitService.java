@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ProduitService extends JpaRepository<Produit, Long> {
-    default List<Produit> findProduitAficher(List<Produit> allProduit){
+    default List<Produit> findProduitAfficher(List<Produit> allProduit){
         List<Produit> produitARetouner = new ArrayList<>();
         String supprimer = "supprimer";
         for(Produit produit : allProduit){
