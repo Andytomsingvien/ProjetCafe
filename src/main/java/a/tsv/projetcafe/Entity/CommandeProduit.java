@@ -13,7 +13,6 @@ public class CommandeProduit {
 
     @Column(name="quantite")
     private int quantite;
-
     @ManyToOne
     @JoinColumn(name="id_commande", nullable=false)
     private Commande commande;

@@ -99,7 +99,7 @@ public class TestCafe {
         listeATester = produitService.findProduitAfficher(allProduits);
         assertEquals(listeATester, listeVrai, "La méthode findProduitAfficher() n'a pas trié correctement");
 
-         */
+         *
      }
 
     }
